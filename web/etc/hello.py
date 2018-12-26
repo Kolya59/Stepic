@@ -1,11 +1,10 @@
-def wsgi_application(environ, start_response):
-	query_str = environ['QUERY_STRING']
-	body = [
-		bytes(i + '\n', 'ascii') for i in query_str.split('&')
-	]
-	status = '200'
-	headers = [
-		('Content-Type', 'text/plain')
-	]
-	start_response(status, headers)
-	return [ body ]
+CONFIG = {
+	# 'mode': 'wsgi',
+	'working_dir' : 'home/box/web/',
+	'args': (
+		# '--bind=127.0.0.1:8080',
+		'--workers=16'
+		'--timeout=60'
+		'hello.wsgi_application'
+	),
+}
